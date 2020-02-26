@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,6 +17,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JRadioButton;
 
 public class Main {
 
@@ -30,13 +32,15 @@ public class Main {
 	IStack<String> data_result;
 	
 	
-	//Se crea una calculadora
-	private ICalculadora calculadora; 
+	//Se crea una instancia unica para la calculadora
+	private ICalculadora calculadora = new Calculadora(); 
 	
 	private JScrollPane scrollPane;
 	private JTable tablaResultados;
 	private ArrayList<String> respuestas;
 	private String[] cadena = null;
+	
+	private String implementar;
 	
 	
 	/**
@@ -75,10 +79,12 @@ public class Main {
 		 * sFactory.getStack("ArrayList"); utiliza una implementación con List
 		 * 
 		 * */
-		data_result = sFactory.getStack("Vector");
+		
+		SeleccionImplementar();
+		System.out.println("seleccion " + implementar);
+		data_result = sFactory.getStack(implementar);
 		/**/
 		
-		calculadora = new Calculadora();
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
@@ -109,7 +115,7 @@ public class Main {
 
 			
 		});
-		btnElegirArchivo.setBounds(146, 35, 131, 29);
+		btnElegirArchivo.setBounds(28, 33, 131, 29);
 		panel.add(btnElegirArchivo);
 		
 		JButton btnMostrarResultado = new JButton("Mostrar Resultado");
@@ -150,6 +156,9 @@ public class Main {
 		JLabel lblResultados = new JLabel("Resultados:");
 		lblResultados.setBounds(28, 174, 95, 16);
 		panel.add(lblResultados);
+		
+		
+		//panel.add(rbVector);
 		frame.setBounds(100, 100, 451, 374);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -237,5 +246,42 @@ public class Main {
             numeric = false;
         }
 		return numeric;
+	}
+	
+	public void SeleccionImplementar() {
+		
+		String[] options = {"OK"};
+        JPanel panel = new JPanel();
+        ButtonGroup grupoDeRadios = new ButtonGroup();
+		
+		JRadioButton rbArrayList = new JRadioButton("ArrayList");
+		rbArrayList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementar = rbArrayList.getText();
+			}
+		});
+		rbArrayList.setBounds(207, 36, 109, 23);
+		panel.add(rbArrayList);
+		
+		JRadioButton rbVector = new JRadioButton("Vector");
+		rbVector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementar = rbVector.getText();
+			}
+
+		});
+		
+		rbVector.setBounds(207, 66, 109, 23);
+		
+		grupoDeRadios.add(rbArrayList);
+		grupoDeRadios.add(rbVector);
+        
+		
+		panel.add(rbArrayList);
+		panel.add(rbVector);
+		
+		JOptionPane.showOptionDialog(null, panel, "Seleccionar implementación", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		
+		//return use;
 	}
 }
