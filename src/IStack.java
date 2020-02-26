@@ -1,24 +1,23 @@
-
-public interface IStack<E> 
+public interface IStack<E>
 {
-
    public void push(E item);
-   // pre: 
-   // post: item is added to stack
-   // will be popped next if no intervening push
-   
+   // post: el item es agregado al stack. Sera
+   //       el proximo en salir
+
    public E pop();
-   // pre: stack is not empty
-   // post: most recently pushed item is removed and returned
-   
+   // pre: stack no esta vacio
+   // post: el elemento ingresado mas recientemente
+   //       es retirado.
+
    public E peek();
-   // pre: stack is not empty
-   // post: top value (next to be popped) is returned
-   
+   //pre: stack no esta vacio
+   //post: el valor mas reciente es retornado
+   //      pero no es sacado del stack.
+
    public boolean empty();
-   // post: returns true if and only if the stack is empty
-   
+   //post: regresa true si el stack esta vacio
+
    public int size();
-   // post: returns the number of elements in the stack
-   
+   //post: regresa la cantidad de elementos
+   //      en el stack
 }
