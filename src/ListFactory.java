@@ -7,12 +7,12 @@ public class ListFactory<E> {
 		if (entry.equals("Circular"))
 	    {
 			System.out.println("Usara Lista circular");
-			return null; //regresa circular
+			return new CircularList(); //regresa circular
 	    }
 		else if (entry.equals("Doble"))
 		{
 			System.out.println("Usara Lista doble");
-	      return null; //regresa doble 
+	      return new DoublyLinkedList(); //regresa doble 
 		}
 		else if (entry.equals("Simple"))
 	    {
