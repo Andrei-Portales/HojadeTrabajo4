@@ -31,6 +31,11 @@ public class Main {
 	
 	IStack<String> data_result;
 	
+	//se crea un factory para poder elegir la implementación de las listas
+	ListFactory<String> lFactory = new ListFactory<String>();
+	
+	IList<String> list_result;
+	
 	
 	//Se crea una instancia unica para la calculadora
 	private ICalculadora calculadora = new Calculadora(); 
@@ -82,7 +87,14 @@ public class Main {
 		
 		SeleccionImplementar();
 		System.out.println("seleccion " + implementar);
-		data_result = sFactory.getStack(implementar);
+		if (implementar.equals("Lista"))
+		{	SeleccionLista();
+			list_result = lFactory.getList(implementar);
+		}
+		else 
+		{
+			data_result = sFactory.getStack(implementar);
+		}
 		/**/
 		
 		frame = new JFrame();
@@ -102,8 +114,15 @@ public class Main {
 					
 					for (String j: cadena) {
 						//calculadora.fillStack(j);
-						doOperation(j);
-						respuestas.add(""+getResult());
+						if (implementar.equals("ArrayList") || implementar.equals("Vector"))
+						{	doOperation(j);
+							respuestas.add(""+getResult());
+						}
+						else {
+							doOperationList(j);
+							respuestas.add(""+getResultList());
+						}
+						
 					}
 					
 					JOptionPane.showMessageDialog(null, "Se leyo el archivo con exito");
@@ -175,6 +194,20 @@ public class Main {
 			
 		return result;
 	}
+	
+	protected String getResultList() {
+		String result = "";
+		
+		if (data_result.size() == 1) {
+			result = list_result.getFirst();
+			list_result.removeFirst();
+		}else 
+		{
+			result = "Error en la operacion";
+		}
+			
+		return result;
+	}
 
 	protected void doOperation(String j) {
 		String[] entrada;
@@ -230,6 +263,62 @@ public class Main {
 		
 	}
 	
+	
+	protected void doOperationList(String j) {
+		String[] entrada;
+		
+		entrada = j.split(" ");
+		
+		try {
+			for (int i = 0; i < entrada.length; i++ )
+			{
+				//es operador o numero?
+				if (isOperator(entrada[i])){
+					//si es operador se retiran dos elementos de la pila y se operan
+					int r = 0, n1= 0, n2 = 0; 
+					n1 = Integer.parseInt(list_result.getFirst());
+					list_result.removeFirst();
+					n2 = Integer.parseInt(list_result.getFirst());
+					list_result.removeFirst();
+					
+					switch(entrada[i]) {
+					case "+":
+						r= calculadora.sumar(n1, n2);
+						break;
+					case "-":
+						r= calculadora.restar(n1, n2);
+						break;
+					case "*":
+						r= calculadora.multiplicar(n1, n2);
+						break;
+					case "/":
+						r= calculadora.dividir(n1, n2);
+						break;
+					}
+					
+					//r = operation(entrada[i], n1, n2);
+					//se ingresa el resultado de la operacion en la pila
+					list_result.addFirst(Integer.toString(r));
+					
+				}else if (isNumeric(entrada[i])){
+					//si es un numero se ingresa a la pila
+					list_result.addFirst(entrada[i]);
+				} else 
+				{ 	//se  limpia la pila
+					while (!(list_result.size() == 0)) {
+						list_result.removeFirst();
+		            } 
+					break;
+				}
+			}
+        } catch (NumberFormatException e) {
+        	
+            while (!(list_result.size() == 0)) {
+            	list_result.removeFirst();
+            }
+      }
+	}	
+	
 	private boolean isOperator(String op) {
 		if (op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/") ) 
 			return true;
@@ -261,7 +350,7 @@ public class Main {
 			}
 		});
 		rbArrayList.setBounds(207, 36, 109, 23);
-		panel.add(rbArrayList);
+		//panel.add(rbArrayList);
 		
 		JRadioButton rbVector = new JRadioButton("Vector");
 		rbVector.addActionListener(new ActionListener() {
@@ -273,12 +362,65 @@ public class Main {
 		
 		rbVector.setBounds(207, 66, 109, 23);
 		
+		JRadioButton rbLista = new JRadioButton("Lista");
+		rbLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementar = rbLista.getText();
+			}
+
+		});
+		
+		rbLista.setBounds(207, 96, 109, 23);
+		
 		grupoDeRadios.add(rbArrayList);
 		grupoDeRadios.add(rbVector);
+		grupoDeRadios.add(rbLista);
         
 		
 		panel.add(rbArrayList);
 		panel.add(rbVector);
+		panel.add(rbLista);
+		
+		JOptionPane.showOptionDialog(null, panel, "Seleccionar implementación", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+		
+		//return use;
+	}
+	
+	public void SeleccionLista() {
+		
+		String[] options = {"OK"};
+        JPanel panel = new JPanel();
+        ButtonGroup grupoDeRadios = new ButtonGroup();
+		
+		JRadioButton rbSimple = new JRadioButton("Simple");
+		rbSimple.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementar = rbSimple.getText();
+			}
+		});
+		rbSimple.setBounds(207, 36, 109, 23);
+		
+		JRadioButton rbDoble = new JRadioButton("Doble");
+		rbDoble.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementar = rbDoble.getText();
+			}
+
+		});
+		rbDoble.setBounds(207, 66, 109, 23);
+		
+		JRadioButton rbCircular = new JRadioButton("Cirular");
+		rbCircular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementar = rbCircular.getText();
+			}
+
+		});
+		rbCircular.setBounds(207, 96, 109, 23);
+		
+		panel.add(rbSimple);
+		panel.add(rbDoble);
+		panel.add(rbCircular);
 		
 		JOptionPane.showOptionDialog(null, panel, "Seleccionar implementación", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 		
