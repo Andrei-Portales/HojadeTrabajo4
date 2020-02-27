@@ -95,7 +95,6 @@ public class DoublyLinkedList<E> extends AbstractList<E>{
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
