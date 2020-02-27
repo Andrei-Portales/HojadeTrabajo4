@@ -38,7 +38,7 @@ public class Main {
 	
 	
 	//Se crea una instancia unica para la calculadora
-	private ICalculadora calculadora = new Calculadora(); 
+	private ICalculadora calculadora ; 
 	
 	private JScrollPane scrollPane;
 	private JTable tablaResultados;
@@ -75,7 +75,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+		calculadora = Calculadora.getInstance();
 		respuestas = new ArrayList<String>();
 		
 		/*

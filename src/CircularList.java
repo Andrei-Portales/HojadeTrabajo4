@@ -11,6 +11,9 @@ public class CircularList<E> extends AbstractList<E>{
 	   count = 0;
 	}
 
+	/**
+	 * metodo para agregar al primero
+	 */
 	public void addFirst(E value)
 	// pre: value non-null
 	// post: adds element to head of list
@@ -26,7 +29,9 @@ public class CircularList<E> extends AbstractList<E>{
 	   count++;
 	}
 
-
+	/**
+	 * metodo para agregar al ultimo
+	 */
 	public void addLast(E value)
 	// pre: value non-null
 	// post: adds element to tail of list
@@ -38,7 +43,9 @@ public class CircularList<E> extends AbstractList<E>{
 
 
 	// lo dificil es quitar el elemento de la cola
-
+	/**
+	 * metodo para remover el ultimo y retornarlo
+	 */
 	public E removeLast()
 	// pre: !isEmpty()
 	// post: returns and removes value from tail of list
@@ -60,6 +67,9 @@ public class CircularList<E> extends AbstractList<E>{
 	   return temp.value();
 	}
 
+	/**
+	 * obtenet el size de la lista
+	 */
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
