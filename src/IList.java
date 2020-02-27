@@ -1,3 +1,9 @@
+//********************************************************************
+//  IList.java       
+//
+//  Interfaz para el uso de listas, basada en 
+//  el ejemplo publicado en canvas
+//********************************************************************
 public interface IList<E> 
 {
 

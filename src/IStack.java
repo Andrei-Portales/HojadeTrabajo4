@@ -1,3 +1,9 @@
+//********************************************************************
+//  IStack.java       
+//
+//  Interfaz para el uso de pilas, basada en 
+//  el ejemplo publicado en canvas
+//********************************************************************
 public interface IStack<E>
 {
    public void push(E item);

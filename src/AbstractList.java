@@ -1,6 +1,13 @@
+//********************************************************************
+//  AbstractList.java       
+//
+//  Clase abstracta en el uso de listas basado en el ejemplo 
+//	publicado en canvas.
+//********************************************************************
 public abstract class AbstractList<E>
        implements IList<E>
 {
+	
    public AbstractList()
    // post: does nothing
    {

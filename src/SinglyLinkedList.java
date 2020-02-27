@@ -1,3 +1,9 @@
+//********************************************************************
+//  SinglyLinkedList.java       
+//
+//  Clase para listas, basada en 
+//  el ejemplo publicado en canvas
+//********************************************************************
 public class SinglyLinkedList<E> extends AbstractList<E>
 {
 

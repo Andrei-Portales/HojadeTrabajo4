@@ -1,3 +1,9 @@
+//********************************************************************
+//  DoublyLinkedList.java       
+//
+//  Clase para el uso de una lista doblemente enlazada, basada en 
+//  el ejemplo publicado en canvas
+//********************************************************************
 import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> extends AbstractList<E>{

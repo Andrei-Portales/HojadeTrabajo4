@@ -1,3 +1,10 @@
+//********************************************************************
+//  StackVector.java       
+//
+//  Interfaz para el uso de pilas implementando Vector, basada en 
+//  el ejemplo publicado en canvas
+//********************************************************************
+
 import java.util.Vector;
 
 public class StackVector<E>

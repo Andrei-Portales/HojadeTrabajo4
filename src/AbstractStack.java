@@ -1,3 +1,9 @@
+//********************************************************************
+//  AbstractStack.java       
+//
+//  Clase abstracta en el uso de pilas basado en el ejemplo 
+//	publicado en canvas.
+//********************************************************************
 abstract public class AbstractStack<E> 
 implements IStack<E>
 {

@@ -1,6 +1,11 @@
-
-public class CircularList<E> extends AbstractList<E>{
-
+//********************************************************************
+//  CircularList.java       
+//
+//  Clase abstracta en el uso de listas circulares basado en el ejemplo 
+//	publicado en canvas.
+//********************************************************************
+public class CircularList<E> extends AbstractList<E>
+{
 	protected Node<E> tail; 
 	protected int count;
 

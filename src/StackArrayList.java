@@ -1,3 +1,9 @@
+//********************************************************************
+//  StackArrayList.java       
+//
+//  Interfaz para el uso de pilas implementando ArrayList, basada en 
+//  el ejemplo publicado en canvas
+//********************************************************************
 import java.util.ArrayList;
 
 public class StackArrayList<E>
